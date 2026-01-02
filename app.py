@@ -31,6 +31,16 @@ def get_secret():
     secret = get_secret_value_response['SecretString']
     return json.loads(secret)
 
+def get_db_config():
+    client = boto3.client('secretsmanager', region_name='ap-south-1')
+
+    response = client.get_secret_value(
+        SecretId='mysql-db-metadata'
+    )
+
+    db_config = json.loads(response['SecretString'])
+    return db_config
+
 @app.route('/db_test')
 def db_test():
     secret = get_secret()
@@ -39,8 +49,9 @@ def db_test():
 
 def get_db_connection():
     secret = get_secret()
-    connection = pymysql.connect(host="terraform-20260102152553239000000002.chqywueo0dha.ap-south-1.rds.amazonaws.com",  # Replace with your RDS endpoint
-                                 db="mydb",   # Replace with your database name
+    db_config = get_db_config()
+    connection = pymysql.connect(host=db_config["host"],  # Replace with your RDS endpoint
+                                 db=db_config["db_name"],   # Replace with your database name
                                  user=secret["username"],      
                                  password=secret["password"],  
                                  cursorclass=pymysql.cursors.DictCursor)
