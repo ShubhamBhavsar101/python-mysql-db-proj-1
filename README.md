@@ -1,4 +1,6 @@
 # python-mysql-db-project
+<img width="1126" height="451" alt="Screenshot 2026-01-04 at 12 46 09 PM" src="https://github.com/user-attachments/assets/9cfc8226-34c0-4f44-b21c-747653bddb94" />
+
 
 1. This is a flask application.
 2. This application connects to an rds database in aws.
