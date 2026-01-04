@@ -9,7 +9,8 @@ from botocore.exceptions import ClientError
 
 
 def get_secret():
-    secret_name = get_parameter("/db/mysql/rds_secret_name")
+    rds_secret = get_parameter("/db/mysql/rds_secret_name")
+    secret_name = rds_secret
     # secret_name = "rds!db-ceaf6479-81a7-41e9-b5e5-a3c348c391f8" # Replace the Secret Name
     region_name = "ap-south-1"
 
@@ -51,7 +52,7 @@ def get_parameter(name):
     )
     print(response)
     value = response["Parameter"]["Value"]
-    return json.loads(value)
+    return value
 
 @app.route('/db_test')
 def db_test():
@@ -60,7 +61,7 @@ def db_test():
         Name="/db/mysql/db_name",
         WithDecryption=True
     )
-    print(response)
+    print(response["Parameter"]["Value"])
     return "DB Test Successful"
 
 def get_db_connection():
