@@ -9,8 +9,7 @@ from botocore.exceptions import ClientError
 
 
 def get_secret():
-    rds_secret = get_parameter("/db/mysql/rds_secret_name")
-    secret_name = rds_secret
+    secret_name = get_parameter("/db/mysql/rds_secret_name")
     # secret_name = "rds!db-a07833b2-e67c-4879-b3a6-77b4f23aef34-uDEMk6" # Replace the Secret Name
     region_name = "ap-south-1"
 
@@ -22,7 +21,7 @@ def get_secret():
     )
 
     try:
-        get_secret_value_response = client.get_secret_value(SecretId="arn:aws:secretsmanager:ap-south-1:842517499452:secret:rds!db-a07833b2-e67c-4879-b3a6-77b4f23aef34-uDEMk6")
+        get_secret_value_response = client.get_secret_value(SecretId=secret_name)
     except ClientError as e:
         # For a list of exceptions thrown, see
         # https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_GetSecretValue.html
