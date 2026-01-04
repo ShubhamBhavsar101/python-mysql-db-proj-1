@@ -22,7 +22,7 @@ def get_secret():
     )
 
     try:
-        get_secret_value_response = client.get_secret_by_arn("arn:aws:secretsmanager:ap-south-1:842517499452:secret:rds!db-a07833b2-e67c-4879-b3a6-77b4f23aef34-uDEMk6")
+        get_secret_value_response = client.get_secret_value(SecretId="arn:aws:secretsmanager:ap-south-1:842517499452:secret:rds!db-a07833b2-e67c-4879-b3a6-77b4f23aef34-uDEMk6")
     except ClientError as e:
         # For a list of exceptions thrown, see
         # https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_GetSecretValue.html
