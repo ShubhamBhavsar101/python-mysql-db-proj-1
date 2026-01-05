@@ -6,3 +6,5 @@
 2. This application connects to an rds database in aws.
 3. The application is served at port 5000.
 4. The application can create table and insert records into the database showcasing database connectivity and read and write operations.
+
+Link to Terraform deployment - [Terraform AWS EC2 Project](https://github.com/ShubhamBhavsar101/terraform-aws-ec2-project)
